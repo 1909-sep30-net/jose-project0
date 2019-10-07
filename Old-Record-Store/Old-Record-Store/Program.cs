@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Old_Record_Store
+namespace Old_Record_Stores
 {
     class Program
     {
