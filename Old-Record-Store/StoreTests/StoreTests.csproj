@@ -1,10 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+   
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>Old_Record_Store</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Old-Record-Store.Library\Old-Record-Store.Library.csproj" />

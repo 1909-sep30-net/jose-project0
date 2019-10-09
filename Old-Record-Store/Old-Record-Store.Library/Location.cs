@@ -8,20 +8,26 @@ namespace Old_Record_Store.Library
     //inventory decreases when orders are accepted
     //rejects orders that cannot be fulfilled with remaining inventory
     //(optional: more than one inventory item decrements for a given product order, for at least one product)
-    class Location
+    public class Location
     {
+        public static List<Records> Inventory { get; set; }
+        public Order Orders { get; set; }
 
-        public Location(string state, List<Records> inventory)
+        public static void UpdateStock(string recordname, int amount)
         {
-            State = state;
-            Inventory = inventory;
+            foreach (Records record in Inventory)
+            {
+                if (record.Name.Equals(recordname) && Records.CheckStock(recordname))
+                {
+                    record.Stock = record.Stock - amount;
+                }
+                else
+                {
+                    Console.WriteLine("Cannot update stock");
+                    break;
+                }
+            }
         }
 
-        public string State { get; set; }
-        public List<Records> Inventory { get; set; }
-
-
     }
-
-
 }

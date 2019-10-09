@@ -2,54 +2,82 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Old_Record_Store.Library
 {
-    class Customer
+    public class Customer
     {
-        List<Customer> CustomerList = new List<Customer>();
-
-        //Customer constructor, requires all fields to create a customer object.
-        public Customer(string fullname, string phone, string address, string email)
-        {
-            FullName = fullname;
-            Phone = phone;
-            Address = address;
-            Email = email;
-        }
+     
+        static List<Customer> CustomerList = new List<Customer>();
 
         //Auto-properties for customer fields
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+        public string custID { get; set; }
 
-        public void AddCustomer(string fullname, string phone, string address, string email)
+        //Creates a customer object and fills the fields according to the name specified, generates an ID with cannot be changed. 
+        public static void AddCustomer(string fullname, string phone, string address, string email)
         {
-            //Creates a new customer object
-            Customer NewCustomer = new Customer(fullname, phone, address, email);
-                
-            //Cannot depend on input/output, will have to move somewhere on UI.
-            ////Populates NewCustomer object fields with user input
-            //Console.WriteLine("Please input your Full Name: ");
-            //NewCustomer.FullName = Console.ReadLine();
-            //Console.WriteLine("\nPlease input your address");
-            //NewCustomer.Address = Console.ReadLine();
-            //Console.WriteLine("\nPlease input your Email: ");
-            //NewCustomer.Email = Console.ReadLine();
-            //Console.WriteLine("\nLastly, please input your Phone: ");
-            //NewCustomer.Phone = Console.ReadLine();
+            Customer cust = new Customer();
+            Random custID =  new Random();
 
-            ////Adds the new customer into the end of Customer list
-            CustomerList.Add(NewCustomer);
-            Console.WriteLine("Customer successfully added, you can now place orders!");
+            cust.FullName = fullname;
+            cust.Phone = phone;
+            cust.Address = address;
+            cust.Email = email;
+            cust.custID = custID.Next().ToString();
 
-            
+            Console.WriteLine("Customer: " + cust.FullName + " successfully added, you can now place orders!" + " ID: " + cust.custID);
+            Console.WriteLine("Please do not forget to write your unique ID");
+
+            CustomerList.Add(cust); 
         }
 
-        public void SeachCustomer()
+        //Prints out the list of customers, does not display ID.
+        public static void DisplayCustomers()
         {
-
+            foreach(Customer cust in CustomerList)
+            {
+                Console.WriteLine("Full Name: " + cust.FullName + " Phone: " + cust.Phone + " Address: " +cust.Address + " Email: " + cust.Email);
+            }
         }
 
+        //Utilizes a field to look up a customer, iterates through customer list and checks if it is there
+        public static bool SeachCustomer(string field)
+        {
+            foreach(Customer cust in CustomerList)
+            {
+                if (cust.FullName == field)
+                {
+                    Console.WriteLine("Customer Found");
+                    return true;
+                }
+                else if (cust.Phone == field)
+                {
+                    Console.WriteLine("Customer Found");
+                    return true;
+                    
+                }
+                else if (cust.Address == field)
+                {
+                    Console.WriteLine("Customer Found");
+                    return true;
+                    
+                }
+                else if (cust.Email == field)
+                {
+                    Console.WriteLine("Customer Found");
+                    
+                }
+                else if (cust.custID == field)
+                {
+                    Console.WriteLine("Customer Found");
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

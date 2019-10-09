@@ -1,45 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace Old_Record_Store.Library
 {
-    // Order: Place order, Display customer order history, display order details, display order history
-    //  	- Order -> Order Constructor(User, Record, Amount)
-    //- Display order.
-    //- Display history.
-    class Order
+    public class Order
     {
-        //Order constructor, requires a customer, records, and amount to successfully initialize the object
-        public Order(Customer customer, Location location, List<Records> record) 
-        { 
-            Customer = customer;
-            Location = location;
-            Record = record;
-        }
 
-        //Auto-properties for Order object initizaliation. 
         public Customer Customer { get; set; }
         public Location Location { get; set; }
-        public List<Records> Record { get; set; }
+        public List<Records> Recordlist { get; set; }
+        public static string Date { get; set; }
 
-        public void PlaceOrder(Customer customer, Location store, string record)
+        public static void PlaceOrder(Customer customer, Location store, List<Records> record, int amount)
         {
-            //Check for inventory availability (do we have the record, do we have the stock)
-            //Find record in store inventory
-            store.Inventory.Find(record);
-            Order NewOrder = new Order(customer, store, store.Inventory);
-            
-        }            
-        public void DisplayOrderHistory() {
+            if (Customer.SeachCustomer(customer.FullName))
+            {
+                foreach (Records rec in record)
+                {
+                    if (Records.CheckStock(rec.Name))
+                    {
+                        Location.UpdateStock(rec.Name, amount);
+                        
+                    }
+                }
+                Date = DateTime.Now.ToString("HH:mm:ss tt");
+                Console.WriteLine("Order sucessfully created. Time of order: " + DateTime.Now.ToString("HH:mm:ss tt"));
+            }
+            else
+            {
+                Console.WriteLine("Customer does not exist, please add customer before placing an order");
+            }
         }
-
-        public void OrderDetails()
-        {
-
-        } 
-
-        //display customer order history
-
     }
 }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old-Record-Store.App", "Old-Record-Store\Old-Record-Store.App.csproj", "{83BF2D36-F5A2-43BF-B14D-7010A0768D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old-Record-Store.App", "Old-Record-Store\Old-Record-Store.App.csproj", "{83BF2D36-F5A2-43BF-B14D-7010A0768D22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old-Record-Store.Library", "Old-Record-Store.Library\Old-Record-Store.Library.csproj", "{601E2EE8-03C6-4DA9-A7F8-B27D26E86FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old-Record-Store.Library", "Old-Record-Store.Library\Old-Record-Store.Library.csproj", "{601E2EE8-03C6-4DA9-A7F8-B27D26E86FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreTests", "StoreTests\StoreTests.csproj", "{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{601E2EE8-03C6-4DA9-A7F8-B27D26E86FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{601E2EE8-03C6-4DA9-A7F8-B27D26E86FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{601E2EE8-03C6-4DA9-A7F8-B27D26E86FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
