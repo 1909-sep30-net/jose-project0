@@ -32,7 +32,6 @@ namespace Old_Record_Stores
                         Console.WriteLine("Please input the customer's e-mail: ");
                         string email = Console.ReadLine();
                         Customer.AddCustomer(name, phone, address, email);
-                        Console.WriteLine("Press Any key to go back to main menu");
                         break;
                     case "b":
                         Console.WriteLine("Displaying current customer list");
@@ -46,7 +45,15 @@ namespace Old_Record_Stores
                         Console.WriteLine("Press Any key to go back to main menu");
                         break;
                     case "d":
-                        Console.WriteLine("Please input a store location: ");
+                        Console.WriteLine("Please input a customer to start the order: ");
+                        Console.WriteLine("Please select a location to order from: ");
+                        string lname = Console.ReadLine();
+                        if (Location.SearchLocation(lname))
+                        {
+                            Console.WriteLine("Location found, please input the records you would like to order: ");
+                            string rname = Console.ReadLine();
+
+                        }
 
                         break;
                     case "e":

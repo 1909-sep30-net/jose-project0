@@ -10,14 +10,15 @@ namespace Old_Record_Store.Library
     //(optional: more than one inventory item decrements for a given product order, for at least one product)
     public class Location
     {
+        public string LocationName { get; set; }
         public static List<Records> Inventory { get; set; }
         public Order Orders { get; set; }
-
-        public static void UpdateStock(string recordname, int amount)
+        static public List<Location> Locations = new List<Location>();
+        public static void UpdateStock(string recordname, int amount, string locationname)
         {
             foreach (Records record in Inventory)
             {
-                if (record.Name.Equals(recordname) && Records.CheckStock(recordname))
+                if (record.Name.Equals(recordname) && Location.CheckStock(recordname))
                 {
                     record.Stock = record.Stock - amount;
                 }
@@ -29,5 +30,41 @@ namespace Old_Record_Store.Library
             }
         }
 
+        public static bool SearchLocation (string locationname)
+        {
+            foreach (Location loc in Locations)
+            {
+                if (locationname.Equals(loc.LocationName))
+                {
+                    Console.WriteLine("Location found");
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool CheckStock(string recordToFind)
+        {
+            foreach (Records record in Inventory)
+            {
+                if (record.Name.Equals(recordToFind) && record.Stock > 0)
+                {
+                    Console.WriteLine(record.Stock);
+                    return true;
+                }
+            }
+            Console.WriteLine("Not enough stock for order");
+            return false;
+        }
+        public static void DisplayLocations()
+        {
+            foreach (Location loc in Locations)
+            {
+                Console.WriteLine("Full Name: " + loc.LocationName);
+            }
+        }
+        public static void AddToOrder(string recordname)
+        {
+
+        }
     }
 }

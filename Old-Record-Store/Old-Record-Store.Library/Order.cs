@@ -12,15 +12,17 @@ namespace Old_Record_Store.Library
         public List<Records> Recordlist { get; set; }
         public static string Date { get; set; }
 
-        public static void PlaceOrder(Customer customer, Location store, List<Records> record, int amount)
+        //                            Customer customer
+        public static void PlaceOrder(string name, Location store, List<Records> record, int amount)
         {
-            if (Customer.SeachCustomer(customer.FullName))
+        //                          customer.FullName
+            if (Customer.SeachCustomer(name))
             {
                 foreach (Records rec in record)
                 {
                     if (Records.CheckStock(rec.Name))
                     {
-                        Location.UpdateStock(rec.Name, amount);
+                        Location.UpdateStock(rec.Name, amount, store.LocationName);
                         
                     }
                 }
