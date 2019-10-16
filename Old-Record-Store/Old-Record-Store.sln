@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old-Record-Store.Library", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreTests", "StoreTests\StoreTests.csproj", "{F71B7610-2B86-498A-BEDF-7D6EEA4D980C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old-Record-Store-DataAccess", "Old-Record-Store-DataAccess\Old-Record-Store-DataAccess.csproj", "{2EAD8CCF-AFBE-45BF-BF9D-E820D89872E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old-Record-Store-DataAccess", "Old-Record-Store-DataAccess\Old-Record-Store-DataAccess.csproj", "{2EAD8CCF-AFBE-45BF-BF9D-E820D89872E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

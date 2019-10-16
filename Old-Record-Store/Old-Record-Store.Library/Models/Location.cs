@@ -10,17 +10,20 @@ namespace Old_Record_Store.Library
     //(optional: more than one inventory item decrements for a given product order, for at least one product)
     public class Location
     {
-        public string LocationName { get; set; }
+        public string Name { get; set; }
+        public int LocationId { get; set; }
         public static List<Records> Inventory { get; set; }
-        public Order Orders { get; set; }
+        public Orders Orders { get; set; }
         static public List<Location> Locations = new List<Location>();
+   
+
         public static void UpdateStock(string recordname, int amount, string locationname)
         {
             foreach (Records record in Inventory)
             {
                 if (record.Name.Equals(recordname) && Location.CheckStock(recordname))
                 {
-                    record.Stock = record.Stock - amount;
+                   // record.Stock = record.Stock - amount;
                 }
                 else
                 {
@@ -30,11 +33,11 @@ namespace Old_Record_Store.Library
             }
         }
 
-        public static bool SearchLocation (string locationname)
+        public static bool SearchLocation (string Name)
         {
             foreach (Location loc in Locations)
             {
-                if (locationname.Equals(loc.LocationName))
+                if (Name.Equals(loc.Name))
                 {
                     Console.WriteLine("Location found");
                     return true;
@@ -44,22 +47,22 @@ namespace Old_Record_Store.Library
         }
         public static bool CheckStock(string recordToFind)
         {
-            foreach (Records record in Inventory)
-            {
-                if (record.Name.Equals(recordToFind) && record.Stock > 0)
-                {
-                    Console.WriteLine(record.Stock);
-                    return true;
-                }
-            }
-            Console.WriteLine("Not enough stock for order");
+            //foreach (Records record in Inventory)
+            //{
+            //    if (record.Name.Equals(recordToFind) && record.Stock > 0)
+            //    {
+            //       // Console.WriteLine(record.Stock);
+            //        return true;
+            //    }
+            //}
+            //Console.WriteLine("Not enough stock for order");
             return false;
         }
         public static void DisplayLocations()
         {
             foreach (Location loc in Locations)
             {
-                Console.WriteLine("Full Name: " + loc.LocationName);
+                Console.WriteLine("Full Name: " + loc.Name);
             }
         }
         public static void AddToOrder(string recordname)
