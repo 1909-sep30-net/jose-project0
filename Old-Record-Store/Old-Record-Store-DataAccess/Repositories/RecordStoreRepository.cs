@@ -5,6 +5,7 @@ using System.Text;
 using Old_Record_Store_DataAccess.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 
 namespace Old_Record_Store_DataAccess.Repositories
 {
@@ -80,39 +81,66 @@ namespace Old_Record_Store_DataAccess.Repositories
 
         public void DisplayOrderDetails(int orderID)
         {
-            var OrderDetails = _dbcontext.Orders.Find(orderID);
-            Console.WriteLine("Display details of Order #" + OrderDetails.OrderId
-                    + "\nCustomer ID: " + OrderDetails.CustomerId + " Name: " + _dbcontext.Customer.Find(OrderDetails.CustomerId).FullName
-                    + "\nLocation ID: " + OrderDetails.LocationId + " Location: " + _dbcontext.Location.Find(OrderDetails.LocationId).Name
-                    + "\nDate: " + OrderDetails.Date);
+            try
+            {
+                var OrderDetails = _dbcontext.Orders.Find(orderID);
+                Console.WriteLine("Display details of Order #" + OrderDetails.OrderId
+                        + "\nCustomer ID: " + OrderDetails.CustomerId + " Name: " + _dbcontext.Customer.Find(OrderDetails.CustomerId).FullName
+                        + "\nLocation ID: " + OrderDetails.LocationId + " Location: " + _dbcontext.Location.Find(OrderDetails.LocationId).Name
+                        + "\nDate: " + OrderDetails.Date);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.ErrorException("Argument null exception! Careful", ex);
+                Console.WriteLine("done");
+            }
         }
 
         public void DisplayOrderHistoryByCustomer(int customerID)
         {
-            var OrderDetails = _dbcontext.Orders.Include(or => or.OrderHistory).Where(r => r.CustomerId == customerID).ToList();
-            foreach (Entities.Orders or in OrderDetails)
+            try
             {
-//                var recordId = _dbcontext.OrderHistory.Find(or.OrderId).RecordId;
-                Console.WriteLine("Display order history of customer " + _dbcontext.Customer.Find(or.CustomerId).FullName + " With customer ID: " + or.CustomerId
-                    + "\nOrder ID: " + or.OrderId + " Record ID: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordId + "Amount: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordAmount
-                    + "\nRecord Name: " + _dbcontext.Records.Find(_dbcontext.OrderHistory.Find(or.OrderId).RecordId).Name
-                    + "\nLocation ID: " + or.LocationId + " Location: " + _dbcontext.Location.Find(or.LocationId).Name
-                    + "\nDate: " + or.Date
-                    + "\n ----------------------------------------------------------------------------");
+                var OrderDetails = _dbcontext.Orders.Include(or => or.OrderHistory).Where(r => r.CustomerId == customerID).ToList();
+                foreach (Entities.Orders or in OrderDetails)
+                {
+                    //                var recordId = _dbcontext.OrderHistory.Find(or.OrderId).RecordId;
+                    Console.WriteLine("Display order history of customer " + _dbcontext.Customer.Find(or.CustomerId).FullName + " With customer ID: " + or.CustomerId
+                        + "\nOrder ID: " + or.OrderId + " Record ID: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordId + "Amount: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordAmount
+                        + "\nRecord Name: " + _dbcontext.Records.Find(_dbcontext.OrderHistory.Find(or.OrderId).RecordId).Name
+                        + "\nLocation ID: " + or.LocationId + " Location: " + _dbcontext.Location.Find(or.LocationId).Name
+                        + "\nDate: " + or.Date
+                        + "\n ----------------------------------------------------------------------------");
+                }
+            }
+            catch(System.NullReferenceException ex)
+            {
+                Console.WriteLine("done");
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.ErrorException("Argument Null Exception! Careful", ex);
             }
         }
 
         public void DisplayOrderHistoryByLocation(int locationID)
         {
-            var OrderDetails = _dbcontext.Orders.Include(or => or.Location).Where(r => r.LocationId == locationID).ToList();
-            foreach (Entities.Orders or in OrderDetails)
+            try
             {
-                var recordId = _dbcontext.OrderHistory.Find(or.OrderId).RecordId;
-                Console.WriteLine("Display Order History from Location: " + or.Location.Name
-                    + "\nOrder ID: " + or.OrderId + " Record ID: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordId + "Amount: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordAmount
-                    + "\nRecord Name: " + _dbcontext.Records.Find(recordId).Name
-                    + "\nDate: " + or.Date
-                    + "\n ----------------------------------------------------------------------------") ;
+                var OrderDetails = _dbcontext.Orders.Include(or => or.Location).Where(r => r.LocationId == locationID).ToList();
+                foreach (Entities.Orders or in OrderDetails)
+                {
+                    var recordId = _dbcontext.OrderHistory.Find(or.OrderId).RecordId;
+                    Console.WriteLine("Display Order History from Location: " + or.Location.Name
+                        + "\nOrder ID: " + or.OrderId + " Record ID: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordId + "Amount: " + _dbcontext.OrderHistory.Find(or.OrderId).RecordAmount
+                        + "\nRecord Name: " + _dbcontext.Records.Find(recordId).Name
+                        + "\nDate: " + or.Date
+                        + "\n ----------------------------------------------------------------------------");
+                }
+            }
+            catch(System.NullReferenceException ex)
+            {
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.ErrorException("Argument Null Exception! Careful", ex);
+                Console.WriteLine("Done");
             }
         }
 
